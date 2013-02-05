@@ -19,7 +19,7 @@ function addItem(h,t,c){
 	d.className='ellipsis';
 	c.holder.appendChild(d);
 	if('symbol' in c) d.firstChild.innerText=c.symbol;
-	else if('data' in c) c.symbol='✓';
+	else if('data' in c) c.symbol='\u2713';
 	for(s in c) d[s]=c[s];
 	if('data' in c) loadItem(d,c.data);
 	return d;
@@ -39,23 +39,23 @@ function alterStyle(i){
 	if(i==_title) cur=d;
 }
 function load(e,data){
-	addItem(_('Manage styles'),true,{holder:pT,symbol:'➤',onclick:function(){
+	addItem(_('Manage styles'),true,{holder:pT,symbol:'\u27A4',onclick:function(){
 		var t=bg.opera.extension.tabs.create({url:'/options.html'});
 		if(t.focus) t.focus();	// Opera 12+ Only
 	}});
-	if(data) addItem(_('Find styles for this site'),true,{holder:pT,symbol:'➤',onclick:function(){
+	if(data) addItem(_('Find styles for this site'),true,{holder:pT,symbol:'\u27A4',onclick:function(){
 		var t=bg.opera.extension.tabs.create({url:'http://userstyles.org/styles/search/'+encodeURIComponent(tab.url)});
 		if(t.focus) t.focus();	// Opera 12+ Only
 	}});
 	if(data&&data.astyles&&data.astyles.length) {
 		_title=data.cstyle||'';
-		addItem(_('Back'),true,{holder:aT,symbol:'◄',onclick:function(){
+		addItem(_('Back'),true,{holder:aT,symbol:'\u25C4',onclick:function(){
 			A.classList.add('hide');P.classList.remove('hide');
 			bg.button.popup.height=P.offsetHeight;
 		}});
 		aT.appendChild(document.createElement('hr'));
 		data.astyles.forEach(alterStyle);
-		addItem(_('Alter stylesheet...'),true,{holder:pT,symbol:'➤',onclick:function(){
+		addItem(_('Alter stylesheet...'),true,{holder:pT,symbol:'\u27A4',onclick:function(){
 			P.classList.add('hide');A.classList.remove('hide');
 			bg.button.popup.height=A.offsetHeight;
 			setTimeout(function(){aB.style.pixelHeight=innerHeight-aB.offsetTop;},0);
