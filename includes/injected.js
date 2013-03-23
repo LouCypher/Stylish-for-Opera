@@ -1,5 +1,4 @@
 var updated=0,style=null,styles={};
-function getKeys(d){var k=[];for(i in d) k.push(i);return k;}
 // Message
 opera.extension.addEventListener('message', function(event) {
 	var message=event.data;
@@ -8,12 +7,11 @@ opera.extension.addEventListener('message', function(event) {
 	else if(message.topic=='GetPopup') opera.extension.postMessage({
 		topic:'GotPopup',
 		data:{
-			styles:getKeys(styles),
-			astyles:getKeys(astyles),
+			styles:Object.getOwnPropertyNames(styles),
+			astyles:Object.getOwnPropertyNames(astyles),
 			cstyle:cur
 		}
 	}); else if(message.topic=='AlterStyle') alterStyle(message.data);
-	else if(message.topic=='LoadStyle') opera.extension.postMessage({topic:'LoadStyle'});
 	else if(message.topic=='CheckedStyle') {
 		if(message.data) {
 			if(!message.data.updated||message.data.updated<updated) window.fireCustomEvent('styleCanBeUpdated');
@@ -52,7 +50,7 @@ function updateStyle(data) {
 function onCSS(data) {
 	if(data.data) styles=data.data;
 	if(data.isApplied) loadStyle();
-	else if(style) {document.head.removeChild(style);style=null;}
+	else if(style) {document.documentElement.removeChild(style);style=null;}
 }
 
 // Alternative style sheets
@@ -97,12 +95,8 @@ function fixOpera(){
 	var id=getData('stylish-id-url'),metaUrl=id+'.json';
 	var req = new window.XMLHttpRequest();
 	req.open('GET', metaUrl, true);
-	req.onload=function(){
-		try{
-			updated=getTime(JSON.parse(req.responseText));
-		} catch(e) {
-			alert('Oops! Failed checking for update!');updated=0;
-		}
+	req.onloadend=function(){
+		if(this.status==200) try{updated=getTime(JSON.parse(req.responseText));} catch(e) {}
 		opera.extension.postMessage({topic:'CheckStyle',data:id});
 	};
 	req.send();

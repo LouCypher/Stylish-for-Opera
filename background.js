@@ -23,15 +23,15 @@ var _=getI18nString;
 try{loadMessages();}catch(e){opera.postError(e);}
 function format(){
 	var a=arguments;
-	if(a[0]) return a[0].replace(/\$(?:\{(\d+)\}|(\d+))/g,function(v,g1,g2){return a[g1||g2]||v;});
+	if(a[0]) return a[0].replace(/\$(?:\{(\d+)\}|(\d+))/g,function(v,g1,g2){g1=a[g1||g2];if(g1==undefined) g1=v;return g1;});
 }
 
 /* ===============Data format 0.3==================
  * ids	List [id]
  * us:id Item	{
+ * 		id:	url||random
  * 		name:	String(stylish-description)
  * 		url:	String		// Homepage
- * 		id:	url||random
  * 		metaUrl:	String	// for update checking
  * 		updateUrl:	String	// for update
  * 		updated:	Int
@@ -49,56 +49,9 @@ function format(){
  * 		}
  */
 (function(){	// Upgrading data to new version
-	var version=getItem('version_storage',0),css=getItem('cssList');
-	if(css&&css[0]&&css[0].css!=undefined) {
-		for(var i=0;i<css.length;i++){
-			var x=css[i];
-			css[i]={
-				name:x.name,
-				enabled:1,
-				data:[{inc:x.includes,css:x.css}]
-			};
-			do{css[i].id=Math.random();}while(map[css[i].id]);
-			map[css[i].id]=css[i];
-		}
-	}
-	if(version<0.2) {
-		css&&css.forEach(function(i){
-			var d=i.data;
-			i.data=[];
-			if(parseInt(i.id)>1) {
-				i.url='http://userstyles.org/styles/'+i.id;
-				i.metaUrl='http://userstyles.org/styles/'+i.id+'.json';
-			}
-			i.deprefix=i.deprefix||[];
-			i.updateUrl=i.url&&!i.options;
-			delete i.options;
-			d.forEach(function(d){
-				var r={
-					domains:[],
-					regexps:[],
-					urlPrefixes:[],
-					urls:[],
-					code:d.css
-				};
-				d.inc.forEach(function(i){
-					if(m=i.match(/^([^\*]*)\*$/)) r.urlPrefixes.push(m[1]);
-					else if(m=i.match(/^\*([^\/\?\*]+)\/\*$/)) r.domains.push(m[1].replace(/\\\./g,'.'));
-					else if(m=i.match(/^\/(.*?)\/$/)) r.regexps.push(m[1]);
-					else if(m=i.match(/^\/\^([^\*]+)\$\/$/)) r.urls.push(m[1].replace(/\\([\.\?])/g,'$1'));
-					else r.urls.push(i);
-				});
-				i.data.push(r);
-			});
-		});
-	}
+	var version=getItem('version_storage',0);
 	if(version<0.3){
-		widget.preferences.removeItem('cssList');
-		var ids=[];
-		css&&css.forEach(function(i){setItem('us:'+i.id,i);ids.push(i.id);});
-		setItem('ids',ids);
 		setItem('version_storage',0.3);
-		if(opera.extension.tabs.getAll)	// Opera 12+ Only
 		opera.extension.tabs.getAll().forEach(function(i){
 			if(/^http:\/\/userstyles\.org\/styles\//.test(i.url)) i.refresh();
 		});
@@ -110,10 +63,11 @@ function saveIDs(){setItem('ids',ids);}
 function newStyle(c,save){
 	var r={
 		name:c?c.name:_('New Style'),
+		url:c&&c.url,
 		id:c&&c.id,
 		metaUrl:c&&c.metaUrl,
 		updated:c?c.updated:null,
-		enabled:c?c.enabled:1,
+		enabled:c&&c.enabled!=undefined?c.enabled:1,
 		deprefix:c&&c.deprefix||[],
 		data:[]
 	};
@@ -124,8 +78,6 @@ function newStyle(c,save){
 function saveStyle(s){
 	if(!map[s.id]) {ids.push(s.id);saveIDs();}
 	setItem('us:'+s.id,map[s.id]=s);
-	// Update Style: Opera 12+ Only
-	if(opera.extension.tabs.getAll)
 	opera.extension.tabs.getAll().forEach(function(t){
 		if(t.port) {
 			var d={};d[s.id]=testURL(t.url,s);
@@ -176,7 +128,7 @@ function testURL(url,e){
 function loadStyle(e) {
 	var c={};
 	ids.forEach(function(i){
-		var d=testURL(e.origin,map[i],true);
+		var d=testURL(e.origin,map[i]);
 		if(typeof d=='string') c[i]=d;
 	});
 	e.source.postMessage({
@@ -186,9 +138,14 @@ function loadStyle(e) {
 }
 function checkStyle(e,d){e.source.postMessage({topic:'CheckedStyle',data:map[d]});}
 function parseFirefoxCSS(e,d){
-	var c=null,i,p,m={},r,code=d.code.replace(/\s+$/,''),data=[];
-	code.replace(/\/\*\s+@(\w+)\s+(.*?)\s+\*\//g,function(v,g1,g2){m[g1]=g2;});
-	for(i in m) if(!d[i]) d[i]=m[i];
+	var c=null,i,p,m,r,code=d.code.replace(/\s+$/,''),data=[],t;
+	code.replace(/\/\*\s+@(\w+)\s+(.*?)\s+\*\//g,function(v,g1,g2){
+		if(d[g1]==undefined) {
+			d[g1]=g2;
+			if(['updated','enabled'].indexOf(g1)>=0)
+				try{d[g1]=JSON.parse(d[g1]);}catch(e){delete d[g1];}
+		}
+	});
 	while(code){
 		i=code.indexOf('@-moz-document');if(i<0) break;
 		p=code.indexOf('{',i);
@@ -211,18 +168,20 @@ function parseFirefoxCSS(e,d){
 	r={error:0};
 	if(!code) {
 		c=map[d.id];
-		if(!c) {d.enabled=1;c=newStyle(d);}
-		else for(i in d) c[i]=d[i];
+		if(!c) {c=newStyle(d);t='add';}
+		else {for(i in d) c[i]=d[i];t='update';}
 		c.data=data;saveStyle(c);
 	} else {
 		r.error=-1;
 		r.message=_('Error parsing CSS code!');
 	}
 	if(e) e.source.postMessage({topic: 'ParsedCSS',data: r});
+	if(c) optionsUpdate(t,ids.indexOf(c.id),_('Style updated.'));
+	else return r.message;
 }
-function fetchURL(url, load){
+function fetchURL(url, cb){
 	var req=new XMLHttpRequest();
-	if(load) req.onload=load;
+	if(cb) req.onloadend=cb;
 	if(url.length>2000) {
 		var parts=url.split('?');
 		req.open('POST',parts[0],true);
