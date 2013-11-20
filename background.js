@@ -72,7 +72,7 @@ function upgradeData(callback){
 				o=JSON.parse(v);
 				if(/^https?:/.test(o.id)&&!o.url) o.url=o.id;
 				delete o.id;
-				saveStyle(o,upgradeItem);
+				saveStyle(o,null,upgradeItem);
 				return;
 			}
 		}
@@ -91,7 +91,7 @@ function getMeta(o){
 		name:o.name,
 		url:o.url,
 		metaUrl:o.metaUrl,
-		updateURL:o.updateURL,
+		updateUrl:o.updateUrl,
 		updated:o.updated,
 		enabled:o.enabled,
 	};
@@ -158,7 +158,7 @@ function enableStyle(id,v,callback){
 					if(r.rows.length) for(i=0;i<r.rows.length;i++) d.push(getSection(r.rows.item(i)));
 					refreshAll(id,d);
 				}); else {
-					var d=[];d[id]=false;
+					var d={};d[id]=false;
 					opera.extension.broadcastMessage({topic:'LoadedStyle',data:{isApplied:settings.isApplied,styles:d}});
 				}
 				if(callback) callback();
@@ -166,12 +166,13 @@ function enableStyle(id,v,callback){
 		},dbError);
 	});
 }
-function saveStyle(o,callback){
+function saveStyle(o,r,callback){
 	function finish(){
 		if(o.data) {
 			refreshAll(o.id,o.data);
 			delete o.data;
 		}
+		if(r) {r.id=o.id;updateItem(r);}
 		if(callback) callback(o);
 	}
 	db.transaction(function(t){
@@ -307,7 +308,7 @@ function fetchURL(url, cb){
 }
 function checkStyle(e,d){
 	db.readTransaction(function(t){
-		t.executeSql('SELECT id,updated FROM metas WHERE url=?',[d],function(t,r){
+		t.executeSql('SELECT * FROM metas WHERE url=?',[d],function(t,r){
 			var o=null;
 			if(r.rows.length) o=getMeta(r.rows.item(0));
 			e.source.postMessage({topic:'CheckedStyle',data:o});
@@ -358,9 +359,7 @@ function parseFirefoxCSS(e,d,callback){
 		if(!c) {c=newStyle(d);r.status=1;}
 		else for(i in d) c[i]=d[i];
 		c.data=data;
-		saveStyle(c,function(){
-			r.id=c.id;updateItem(r);finish();
-		});
+		saveStyle(c,r,finish);
 	} else {
 		r.status=-1;
 		r.message=_('msgErrorParsing');
@@ -401,9 +400,7 @@ function parseCSS(e,data,callback){
 		} else c.updated=data.updated;
 		c.data=d;
 		c.updateUrl=j.updateUrl;
-		saveStyle(c,function(){
-			r.id=c.id;updateItem(r);finish();
-		});
+		saveStyle(c,r,finish);
 	} else finish();
 }
 function parseJSON(e,data,callback){
@@ -429,9 +426,7 @@ function parseJSON(e,data,callback){
 				code:i.code||'',
 			});
 		});
-		saveStyle(c,function(){
-			r.id=c.id;updateItem(r);finish();
-		});
+		saveStyle(c,r,finish);
 	}catch(e){
 		opera.postError(e);
 		r.status=-1;
@@ -458,27 +453,23 @@ function checkUpdateO(o){
 	if(_update[o.id]) return;_update[o.id]=1;
 	function finish(){delete _update[o.id];}
 	var r={id:o.id,hideUpdate:1,status:2};
-	function update(){
-		if(o.updateUrl) {
-			r.message=_('msgUpdating');
-			fetchURL(o.updateUrl,function(){
-				parseCSS(null,{status:this.status,id:c.id,updated:d,code:this.responseText});
-			});
-		} else r.message='<span class=new>'+_('msgNewVersion')+'</span>';
-		updateItem(r);finish();
-	}
 	if(o.metaUrl) {
 		r.message=_('msgCheckingForUpdate');updateItem(r);
 		fetchURL(o.metaUrl,function(){
 			r.message=_('msgErrorFetchingUpdateInfo');
+			delete r.hideUpdate;
 			if(this.status==200) try{
 				d=getTime(JSON.parse(this.responseText));
 				if(!o.updated||o.updated<d) {
-					if(o.updateUrl) return update();
-					r.message=_('msgNoUpdate');
+					if(o.updateUrl) {
+						r.message=_('msgUpdating');
+						r.hideUpdate=1;
+						fetchURL(o.updateUrl,function(){
+							parseCSS(null,{status:this.status,id:c.id,updated:d,code:this.responseText});
+						});
+					} else r.message='<span class=new>'+_('msgNewVersion')+'</span>';
 				} else r.message=_('msgNoUpdate');
 			} catch(e) {opera.postError(e);}
-			delete r.hideUpdate;
 			updateItem(r);finish();
 		});
 	} else finish();
@@ -526,6 +517,7 @@ function updateItem(r){	// update loaded options pages
 			i++;
 		}catch(e){
 			_updateItem.splice(i,1);
+			opera.postError(e);
 		}
 }
 function initIcon(){
