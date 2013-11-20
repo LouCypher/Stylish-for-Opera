@@ -8,99 +8,99 @@
 		"description": "Description for this extension."
 	}, 
 	"extTranslator": {
-		"message": "Gerald <gera2ld@163.com>", 
+		"message": "Wald", 
 		"description": "Information of the translator."
 	}, 
 	"labelNewStyle": {
-		"message": "New Style", 
+		"message": "Новый стиль", 
 		"description": "Default name of a new style."
 	}, 
 	"msgConfirm": {
-		"message": "Do you want to install this style?", 
+		"message": "Вы хотите установить этот стиль?", 
 		"description": "Message shown before installing a style."
 	}, 
 	"msgUpdated": {
-		"message": "Style updated.", 
+		"message": "Стиль обновлен.", 
 		"description": "Message shown when a style is updated/reinstalled."
 	}, 
 	"msgErrorParsing": {
-		"message": "Error parsing CSS code!", 
+		"message": "Ошибка разбора кода CSS!", 
 		"description": "Message shown when CSS code is invalid."
 	}, 
 	"msgErrorFetchingStyle": {
-		"message": "Error fetching CSS code!", 
+		"message": "Ошибка выборки CSS кода!", 
 		"description": "Message shown when Stylish fails fetching a new version of the style."
 	}, 
 	"msgInstalled": {
-		"message": "Style installed.", 
+		"message": "Стиль установлен.", 
 		"description": "Message shown when a style is installed."
 	}, 
 	"msgUpdating": {
-		"message": "Updating...", 
+		"message": "Обновление...", 
 		"description": "Message shown when a new version of style is being fetched."
 	}, 
 	"msgNewVersion": {
-		"message": "New version found.", 
+		"message": "Найдена новая версия.", 
 		"description": "Message shown when a new version of style is found by metaUrl, but no updateUrl is provided."
 	}, 
 	"msgCheckingForUpdate": {
-		"message": "Checking for updates...", 
+		"message": "Поиск обновлений...", 
 		"description": "Message shown when a style is being checked for updates."
 	}, 
 	"msgErrorFetchingUpdateInfo": {
-		"message": "Failed fetching update information.", 
+		"message": "Не удалось получить сведения об обновлениях.", 
 		"description": "Message shown when Stylish fails fetching version data of the style."
 	}, 
 	"msgNoUpdate": {
-		"message": "No update found.", 
+		"message": "Обновление не найдено.", 
 		"description": "Message shown when there is no new version of a style."
 	}, 
 	"labelNoName": {
-		"message": "Null name", 
+		"message": "Без названия", 
 		"description": "Text as the name of a style when name is empty."
 	}, 
 	"menuManageStyles": {
-		"message": "Manage styles", 
+		"message": "Управление стилями", 
 		"description": "Menu item to manage styles, or to open the options page of the extension."
 	}, 
 	"menuFindStyles": {
-		"message": "Find styles for this site", 
+		"message": "Найти стили для этого сайта", 
 		"description": "Menu item to find styles for a site."
 	}, 
 	"menuStylesEnabled": {
-		"message": "Styles enabled", 
+		"message": "Стили включены", 
 		"description": "Menu item showing the status of Stylish, whether enabled."
 	}, 
 	"menuBack": {
-		"message": "Back", 
+		"message": "Назад", 
 		"description": "Menu item to go back to main menu from alternate stylesheets."
 	}, 
 	"menuAlterStylesheet": {
-		"message": "Alter stylesheet...", 
+		"message": "Изменить стиль...", 
 		"description": "Menu item to show alternate stylesheets of the current page."
 	}, 
 	"labelOptions": {
-		"message": "Options", 
+		"message": "Опции", 
 		"description": "Options of this extension."
 	}, 
 	"buttonNew": {
-		"message": "New", 
+		"message": "Новый", 
 		"description": "Button to create a new style."
 	}, 
 	"anchorGetMoreStyles": {
-		"message": "<a href=http://userstyles.org target=_blank>Get more styles from userstyles.org</a>", 
+		"message": "<a href=http://userstyles.org target=_blank>Получить больше стилей от userstyles.org</a>", 
 		"description": "Link to get more styles."
 	}, 
 	"anchorUpdateAll": {
-		"message": "Check all for updates", 
+		"message": "Проверка всех обновлений", 
 		"description": "Check all styles for updates."
 	}, 
 	"buttonAdvanced": {
-		"message": "Advanced", 
+		"message": "Дополнительно", 
 		"description": "Button to show the advanced options."
 	}, 
 	"labelInstalledStyles": {
-		"message": "Installed Styles", 
+		"message": "Установленные стили", 
 		"description": "Label of the list of installed styles."
 	}, 
 	"anchorSupportPage": {
@@ -108,47 +108,47 @@
 		"description": "Link to the support page of Stylish."
 	}, 
 	"anchorAuthor": {
-		"message": "Designed by <a href=mailto:gera2ld@163.com>Gerald</a>", 
+		"message": "Дизайн от <a href=mailto:gera2ld@163.com>Gerald</a>", 
 		"description": "Author shown in the footer of options page, translator information may be added."
 	}, 
 	"labelStyleEditor": {
-		"message": "Style Editor", 
+		"message": "Редактор стилей", 
 		"description": "Shown in the title of the style editing page."
 	}, 
 	"labelName": {
-		"message": "Name:", 
+		"message": "Имя:", 
 		"description": "Label of style name."
 	}, 
 	"labelSections": {
-		"message": "Sections:", 
+		"message": "Разделы:", 
 		"description": "Label of sections."
 	}, 
 	"buttonNewSection": {
-		"message": "New", 
+		"message": "Новый", 
 		"description": "Button to add a section."
 	}, 
 	"buttonDeleteSection": {
-		"message": "Delete", 
+		"message": "Удалить", 
 		"description": "Button to remove a section."
 	}, 
 	"buttonRenameSection": {
-		"message": "Rename", 
+		"message": "Переименовать", 
 		"description": "Button to rename a section."
 	}, 
 	"labelRules": {
-		"message": "Rules: <em>(One per line)</em>", 
+		"message": "Правила: <em>(По одному на строку)</em>", 
 		"description": "Label of rules."
 	}, 
 	"labelDomains": {
-		"message": "Domains", 
+		"message": "Домены", 
 		"description": "Label of domain rules."
 	}, 
 	"labelRegExps": {
-		"message": "Regular Expressions", 
+		"message": "Регулярные выражения", 
 		"description": "Label of regular-expression rules."
 	}, 
 	"labelUrlPrefixes": {
-		"message": "URL prefixes", 
+		"message": "Префиксы URL", 
 		"description": "Label of UrlPrefix rules."
 	}, 
 	"labelURLs": {
@@ -156,7 +156,7 @@
 		"description": "Label of URL rules."
 	}, 
 	"labelCode": {
-		"message": "Code:", 
+		"message": "Код:", 
 		"description": "Label of CSS code."
 	}, 
 	"Remove prefixes while applying:": {
@@ -164,27 +164,27 @@
 		"description": ""
 	}, 
 	"buttonSave": {
-		"message": "Save", 
+		"message": "Сохранить", 
 		"description": "Button to save modifications of a style."
 	}, 
 	"buttonSaveClose": {
-		"message": "Save & Close", 
+		"message": "Сохранить и закрыть", 
 		"description": "Button to save modifications of a style and then close the editing page."
 	}, 
 	"buttonClose": {
-		"message": "Close", 
+		"message": "Закрыть", 
 		"description": "Button to close window."
 	}, 
 	"labelExport": {
-		"message": "Data Export", 
+		"message": "Экспорт данных", 
 		"description": "Label shown in the title of export dialog."
 	}, 
 	"anchorExportOptions": {
-		"message": "Options", 
+		"message": "Опции", 
 		"description": "Options of export."
 	}, 
 	"labelFirefoxCSS": {
-		"message": "Export to Firefox CSS files", 
+		"message": "Экспорт в Firefox CSS файлы", 
 		"description": "Option to export data as Firefox CSS files."
 	}, 
 	"hintFirefoxCSS": {
@@ -192,11 +192,11 @@
 		"description": "Hint for option of FirefoxCSS."
 	}, 
 	"buttonAllNone": {
-		"message": "All/None", 
+		"message": "Все/Ничего", 
 		"description": "Button to select all styles or none."
 	}, 
 	"labelAdvanced": {
-		"message": "Advanced", 
+		"message": "Дополнительно", 
 		"description": "Label shown in the title of advanced dialog."
 	}, 
 	"labelShowButton": {
@@ -204,63 +204,63 @@
 		"description": "Option to show an icon of this extension in the toolbar."
 	}, 
 	"labelData": {
-		"message": "Data", 
+		"message": "Данные", 
 		"description": "Label of extension data management."
 	}, 
 	"buttonExportData": {
-		"message": "Export to zip file", 
+		"message": "Экспорт в ZIP файл", 
 		"description": "Button to open the data export dialog."
 	}, 
 	"buttonImportData": {
-		"message": "Import from zip file", 
+		"message": "Импорт из ZIP-файла", 
 		"description": "Button to choose a file for data import."
 	}, 
 	"labelLastUpdated": {
-		"message": "Last updated: ", 
+		"message": "Последнее обновление: ", 
 		"description": "Label of last updated timestamp of a style."
 	}, 
 	"anchorUpdate": {
-		"message": "Check for updates", 
+		"message": "Проверка обновлений", 
 		"description": "Check a style for updates."
 	}, 
 	"buttonEdit": {
-		"message": "Edit", 
+		"message": "Изменить", 
 		"description": "Button to edit a style."
 	}, 
 	"buttonDisable": {
-		"message": "Disable", 
+		"message": "Отключить", 
 		"description": "Button to disable a style."
 	}, 
 	"buttonEnable": {
-		"message": "Enable", 
+		"message": "Включить", 
 		"description": "Button to enable a style."
 	}, 
 	"buttonRemove": {
-		"message": "Remove", 
+		"message": "Удалить", 
 		"description": "Button to remove a style."
 	}, 
 	"confirmNotSaved": {
-		"message": "Modifications are not saved!\nClick OK to discard them or cancel to stay.", 
+		"message": "Изменения не сохранены!\nНажмите кнопку ОК, чтобы отменить их или Отмена, чтобы остаться.", 
 		"description": "Confirm message shown when there are unsaved style modifications."
 	}, 
 	"msgImported": {
-		"message": "$1 item(s) are imported.", 
+		"message": "$1 скрипт(ов) импортировано.", 
 		"description": "Message shown after import. There is an argument referring to the count of styles imported."
 	}, 
 	"msgErrorZip": {
-		"message": "Error loading zip file.", 
+		"message": "Ошибка загрузки zip-файла.", 
 		"description": "Message shown when Stylish fails to open the zip file."
 	}, 
 	"buttonExport": {
-		"message": "Export", 
+		"message": "Экспорт", 
 		"description": "Button to confirm export."
 	}, 
 	"buttonExporting": {
-		"message": "Exporting...", 
+		"message": "Экспорт...", 
 		"description": "Message shown when data export is in progress."
 	}, 
 	"msgRename": {
-		"message": "Rename Section \"$1\" to:", 
+		"message": "Переименовать раздел \"$1\" на:", 
 		"description": "Message shown when a section is going to be renamed."
 	}
 }

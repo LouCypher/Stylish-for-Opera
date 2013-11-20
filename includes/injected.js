@@ -1,9 +1,8 @@
-var updated=0,style=null,styles={};
+var updated=0,css=null,styles={};
 // Message
 opera.extension.addEventListener('message', function(event) {
 	var message=event.data;
-	if(message.topic=='LoadedStyle') onCSS(message.data);
-	else if(message.topic=='UpdateStyle') updateStyle(message.data);
+	if(message.topic=='LoadedStyle') loadStyle(message.data);
 	else if(message.topic=='GetPopup') opera.extension.postMessage({
 		topic:'GotPopup',
 		data:{
@@ -16,41 +15,59 @@ opera.extension.addEventListener('message', function(event) {
 		if(message.data) {
 			if(!message.data.updated||message.data.updated<updated) window.fireCustomEvent('styleCanBeUpdated');
 			else window.fireCustomEvent('styleAlreadyInstalledOpera');
+			installCallback.id=message.data.id;
 		} else window.fireCustomEvent('styleCanBeInstalledOpera');
 	} else if(message.topic=='ParsedCSS') {
-		if(!message.data.error) window.fireCustomEvent('styleInstalled');
-		else alert(message.data.message);
+		if(window.fireCustomEvent) {
+			if(message.data.status<0) alert(message.data.message);
+			else window.fireCustomEvent('styleInstalled');
+		} else showMessage(message.data.message);
 	} else if(message.topic=='ConfirmInstall') {
 		if(message.data&&confirm(message.data)) {
 			if(installCallback) installCallback();
-			else opera.extension.postMessage({topic:'ParseFirefoxCSS',data:{code:document.body.innerText}});
+			else {
+				var t='ParseFirefoxCSS';
+				if(/\.json$/.test(window.location.href)) t='ParseJSON';
+				opera.extension.postMessage({topic:t,data:{code:document.body.innerText}});
+			}
 		}
 	}
 }, false);
 opera.extension.postMessage({topic:'LoadStyle'});
+function showMessage(data){
+	var d=document.createElement('div');
+	d.style='position:fixed;border-radius:5px;background:orange;padding:20px;z-index:9999;box-shadow:5px 10px 15px rgba(0,0,0,0.4);transition:opacity 1s linear;opacity:0;text-align:left;';
+	document.body.appendChild(d);d.innerHTML=data;
+	d.style.top=(window.innerHeight-d.offsetHeight)/2+'px';
+	d.style.left=(window.innerWidth-d.offsetWidth)/2+'px';
+	function close(){document.body.removeChild(d);delete d;}
+	d.onclick=close;	// close immediately
+	setTimeout(function(){d.style.opacity=1;},1);	// fade in
+	setTimeout(function(){d.style.opacity=0;setTimeout(close,1000);},3000);	// fade out
+}
 
 // CSS applying
-function loadStyle(e){
-	if(!style) {
-		style=document.createElement('style');
-		style.setAttribute('type', 'text/css');
-		document.documentElement.appendChild(style);
+function loadStyle(data) {
+	var i,c;
+	if(data.styles) for(i in data.styles) {
+		c=data.styles[i];
+		if(c==null) delete styles[i];		// deleted
+		else if(c==false) {
+			if(i in styles) styles[i]='';		// disabled
+		} else if(typeof c=='string') styles[i]=c;
 	}
-	if(styles) {
-		var i,c=[];
-		for(i in styles) c.push(styles[i]);
-		style.innerHTML=c.join('');
-	}
-}
-function updateStyle(data) {
-	for(var i in data)
-		if(typeof data[i]=='string') styles[i]=data[i]; else delete styles[i];
-	loadStyle();
-}
-function onCSS(data) {
-	if(data.data) styles=data.data;
-	if(data.isApplied) loadStyle();
-	else if(style) {document.documentElement.removeChild(style);style=null;}
+	if(data.isApplied) {
+		if(!css) {
+			css=document.createElement('style');
+			css.setAttribute('type', 'text/css');
+			document.documentElement.appendChild(css);
+		}
+		if(styles) {
+			c=[];
+			for(i in styles) c.push(styles[i]);
+			css.innerHTML=c.join('');
+		}
+	} else if(css) {document.documentElement.removeChild(css);css=null;}
 }
 
 // Alternative style sheets
@@ -92,12 +109,12 @@ function fixOpera(){
 		var s=document.querySelector('link[rel='+k+']');
 		if(s) return s.getAttribute('href');
 	}
-	var id=getData('stylish-id-url'),metaUrl=id+'.json';
+	var url=getData('stylish-id-url'),metaUrl=url+'.json';
 	var req = new window.XMLHttpRequest();
 	req.open('GET', metaUrl, true);
 	req.onloadend=function(){
 		if(this.status==200) try{updated=getTime(JSON.parse(req.responseText));} catch(e) {}
-		opera.extension.postMessage({topic:'CheckStyle',data:id});
+		opera.extension.postMessage({topic:'CheckStyle',data:url});
 	};
 	req.send();
 
@@ -105,10 +122,11 @@ function fixOpera(){
 		opera.extension.postMessage({
 			topic:'InstallStyle',
 			data:{
-				id:id,
+				id:installCallback.id,
+				url:url,
 				metaUrl:metaUrl,
+				updateUrl:getData('stylish-code-opera'),
 				updated:updated,
-				url:getData('stylish-code-opera'),
 			}
 		});
 		if(installCallback.ping){
@@ -123,7 +141,7 @@ function fixOpera(){
 	window.addCustomEventListener('stylishUpdate',update);
 }
 var installCallback=null;
-if(/\.user\.css$/.test(window.location.href)) (function(){
+if(/\.user\.css$|\.json$/.test(window.location.href)) (function(){
 	function install(){
 		if(document&&document.body&&!document.querySelector('title')) opera.extension.postMessage({topic:'InstallStyle'});
 	}

@@ -4,55 +4,55 @@
 		"description": "Name of this extension."
 	}, 
 	"extDescription": {
-		"message": "Stylish for Opera allows custom styles for different URLs.", 
+		"message": "Stylish für Opera ermöglicht es UserCSS für unterschiedliche URLs von userstyles.org zu verwenden.", 
 		"description": "Description for this extension."
 	}, 
 	"extTranslator": {
-		"message": "Gerald <gera2ld@163.com>", 
+		"message": "Zinko <zinko_000@geekmail.de>", 
 		"description": "Information of the translator."
 	}, 
 	"labelNewStyle": {
-		"message": "New Style", 
+		"message": "Neues Style", 
 		"description": "Default name of a new style."
 	}, 
 	"msgConfirm": {
-		"message": "Do you want to install this style?", 
+		"message": "Möchtest du dieses Style installieren ?", 
 		"description": "Message shown before installing a style."
 	}, 
 	"msgUpdated": {
-		"message": "Style updated.", 
+		"message": "Style aktualisiert.", 
 		"description": "Message shown when a style is updated/reinstalled."
 	}, 
 	"msgErrorParsing": {
-		"message": "Error parsing CSS code!", 
+		"message": "Fehler beim analysieren des CSS code!", 
 		"description": "Message shown when CSS code is invalid."
 	}, 
 	"msgErrorFetchingStyle": {
-		"message": "Error fetching CSS code!", 
+		"message": "Fehler beim laden des CSS-code!", 
 		"description": "Message shown when Stylish fails fetching a new version of the style."
 	}, 
 	"msgInstalled": {
-		"message": "Style installed.", 
+		"message": "Style installiert.", 
 		"description": "Message shown when a style is installed."
 	}, 
 	"msgUpdating": {
-		"message": "Updating...", 
+		"message": "Aktualisiere...", 
 		"description": "Message shown when a new version of style is being fetched."
 	}, 
 	"msgNewVersion": {
-		"message": "New version found.", 
+		"message": "Neue Version gefunden.", 
 		"description": "Message shown when a new version of style is found by metaUrl, but no updateUrl is provided."
 	}, 
 	"msgCheckingForUpdate": {
-		"message": "Checking for updates...", 
+		"message": "Prüfe auf Updates...", 
 		"description": "Message shown when a style is being checked for updates."
 	}, 
 	"msgErrorFetchingUpdateInfo": {
-		"message": "Failed fetching update information.", 
+		"message": "Laden von Update-Informationen fehlgeschlagen", 
 		"description": "Message shown when Stylish fails fetching version data of the style."
 	}, 
 	"msgNoUpdate": {
-		"message": "No update found.", 
+		"message": "Kein Update gefunden.", 
 		"description": "Message shown when there is no new version of a style."
 	}, 
 	"labelNoName": {
@@ -60,47 +60,47 @@
 		"description": "Text as the name of a style when name is empty."
 	}, 
 	"menuManageStyles": {
-		"message": "Manage styles", 
+		"message": "Styles verwalten", 
 		"description": "Menu item to manage styles, or to open the options page of the extension."
 	}, 
 	"menuFindStyles": {
-		"message": "Find styles for this site", 
+		"message": "Finde Styles für diese Seite", 
 		"description": "Menu item to find styles for a site."
 	}, 
 	"menuStylesEnabled": {
-		"message": "Styles enabled", 
+		"message": "Aktiviere Styles", 
 		"description": "Menu item showing the status of Stylish, whether enabled."
 	}, 
 	"menuBack": {
-		"message": "Back", 
+		"message": "Zurück", 
 		"description": "Menu item to go back to main menu from alternate stylesheets."
 	}, 
 	"menuAlterStylesheet": {
-		"message": "Alter stylesheet...", 
+		"message": "Ändere stylesheet...", 
 		"description": "Menu item to show alternate stylesheets of the current page."
 	}, 
 	"labelOptions": {
-		"message": "Options", 
+		"message": "Optionen", 
 		"description": "Options of this extension."
 	}, 
 	"buttonNew": {
-		"message": "New", 
+		"message": "Neu", 
 		"description": "Button to create a new style."
 	}, 
 	"anchorGetMoreStyles": {
-		"message": "<a href=http://userstyles.org target=_blank>Get more styles from userstyles.org</a>", 
+		"message": "<a href=http://userstyles.org target=_blank>Mehr Styles auf userstyles.org</a>", 
 		"description": "Link to get more styles."
 	}, 
 	"anchorUpdateAll": {
-		"message": "Check all for updates", 
+		"message": "Alle auf Update prüfen", 
 		"description": "Check all styles for updates."
 	}, 
 	"buttonAdvanced": {
-		"message": "Advanced", 
+		"message": "Erweitert", 
 		"description": "Button to show the advanced options."
 	}, 
 	"labelInstalledStyles": {
-		"message": "Installed Styles", 
+		"message": "Installierte Styles", 
 		"description": "Label of the list of installed styles."
 	}, 
 	"anchorSupportPage": {
@@ -108,7 +108,7 @@
 		"description": "Link to the support page of Stylish."
 	}, 
 	"anchorAuthor": {
-		"message": "Designed by <a href=mailto:gera2ld@163.com>Gerald</a>", 
+		"message": "Entwickelt von <a href=mailto:gera2ld@163.com>Gerald</a>", 
 		"description": "Author shown in the footer of options page, translator information may be added."
 	}, 
 	"labelStyleEditor": {
@@ -120,23 +120,23 @@
 		"description": "Label of style name."
 	}, 
 	"labelSections": {
-		"message": "Sections:", 
+		"message": "Abschnitte:", 
 		"description": "Label of sections."
 	}, 
 	"buttonNewSection": {
-		"message": "New", 
+		"message": "Neu", 
 		"description": "Button to add a section."
 	}, 
 	"buttonDeleteSection": {
-		"message": "Delete", 
+		"message": "Löschen", 
 		"description": "Button to remove a section."
 	}, 
 	"buttonRenameSection": {
-		"message": "Rename", 
+		"message": "Umbenennen", 
 		"description": "Button to rename a section."
 	}, 
 	"labelRules": {
-		"message": "Rules: <em>(One per line)</em>", 
+		"message": "Regeln: <em>(Eine pro Zeile)</em>", 
 		"description": "Label of rules."
 	}, 
 	"labelDomains": {
@@ -144,11 +144,11 @@
 		"description": "Label of domain rules."
 	}, 
 	"labelRegExps": {
-		"message": "Regular Expressions", 
+		"message": "Reguläre Ausdrücke", 
 		"description": "Label of regular-expression rules."
 	}, 
 	"labelUrlPrefixes": {
-		"message": "URL prefixes", 
+		"message": "URL Präfixen", 
 		"description": "Label of UrlPrefix rules."
 	}, 
 	"labelURLs": {
@@ -160,107 +160,107 @@
 		"description": "Label of CSS code."
 	}, 
 	"Remove prefixes while applying:": {
-		"message": "Remove prefixes while applying:", 
+		"message": "Entferne Präfix beim Speichern:", 
 		"description": ""
 	}, 
 	"buttonSave": {
-		"message": "Save", 
+		"message": "Speichern", 
 		"description": "Button to save modifications of a style."
 	}, 
 	"buttonSaveClose": {
-		"message": "Save & Close", 
+		"message": "Speichern & Schließen", 
 		"description": "Button to save modifications of a style and then close the editing page."
 	}, 
 	"buttonClose": {
-		"message": "Close", 
+		"message": "Schließen", 
 		"description": "Button to close window."
 	}, 
 	"labelExport": {
-		"message": "Data Export", 
+		"message": "Datenexport", 
 		"description": "Label shown in the title of export dialog."
 	}, 
 	"anchorExportOptions": {
-		"message": "Options", 
+		"message": "Optionen", 
 		"description": "Options of export."
 	}, 
 	"labelFirefoxCSS": {
-		"message": "Export to Firefox CSS files", 
+		"message": "Zu Firefox CSS-Dateien exportieren", 
 		"description": "Option to export data as Firefox CSS files."
 	}, 
 	"hintFirefoxCSS": {
-		"message": "<a href=# title=\"Export to .user.css files, of which the syntax is only supported by Firefox.\">(?)</a>", 
+		"message": "<a href=# title=\"Exportieren nach .user.css Dateien, von denen das Syntax nur von Firefox unterstützt wird.\">(?)</a>", 
 		"description": "Hint for option of FirefoxCSS."
 	}, 
 	"buttonAllNone": {
-		"message": "All/None", 
+		"message": "Alle/Keine", 
 		"description": "Button to select all styles or none."
 	}, 
 	"labelAdvanced": {
-		"message": "Advanced", 
+		"message": "Erweitert", 
 		"description": "Label shown in the title of advanced dialog."
 	}, 
 	"labelShowButton": {
-		"message": "Show button on toolbar", 
+		"message": "Zeige Schaltfläche auf der Symbolleiste", 
 		"description": "Option to show an icon of this extension in the toolbar."
 	}, 
 	"labelData": {
-		"message": "Data", 
+		"message": "Daten", 
 		"description": "Label of extension data management."
 	}, 
 	"buttonExportData": {
-		"message": "Export to zip file", 
+		"message": "Zu ZIP-Datei exportieren", 
 		"description": "Button to open the data export dialog."
 	}, 
 	"buttonImportData": {
-		"message": "Import from zip file", 
+		"message": "Von ZIP-Datei importieren", 
 		"description": "Button to choose a file for data import."
 	}, 
 	"labelLastUpdated": {
-		"message": "Last updated: ", 
+		"message": "Letztes Update:", 
 		"description": "Label of last updated timestamp of a style."
 	}, 
 	"anchorUpdate": {
-		"message": "Check for updates", 
+		"message": "Auf Update prüfen", 
 		"description": "Check a style for updates."
 	}, 
 	"buttonEdit": {
-		"message": "Edit", 
+		"message": "Bearbeiten", 
 		"description": "Button to edit a style."
 	}, 
 	"buttonDisable": {
-		"message": "Disable", 
+		"message": "Deaktivieren", 
 		"description": "Button to disable a style."
 	}, 
 	"buttonEnable": {
-		"message": "Enable", 
+		"message": "Aktivieren", 
 		"description": "Button to enable a style."
 	}, 
 	"buttonRemove": {
-		"message": "Remove", 
+		"message": "Entfernen", 
 		"description": "Button to remove a style."
 	}, 
 	"confirmNotSaved": {
-		"message": "Modifications are not saved!\nClick OK to discard them or cancel to stay.", 
+		"message": "Modifikationen werden nicht gespeichert!\nKlicken Sie auf OK um zu schließen oder auf Abbrechen um zurückzukehren.", 
 		"description": "Confirm message shown when there are unsaved style modifications."
 	}, 
 	"msgImported": {
-		"message": "$1 item(s) are imported.", 
+		"message": "$1 Datei(en) wurden importiert.", 
 		"description": "Message shown after import. There is an argument referring to the count of styles imported."
 	}, 
 	"msgErrorZip": {
-		"message": "Error loading zip file.", 
+		"message": "Fehler beim laden der ZIP-Datei!", 
 		"description": "Message shown when Stylish fails to open the zip file."
 	}, 
 	"buttonExport": {
-		"message": "Export", 
+		"message": "Exportieren", 
 		"description": "Button to confirm export."
 	}, 
 	"buttonExporting": {
-		"message": "Exporting...", 
+		"message": "Exportiere...", 
 		"description": "Message shown when data export is in progress."
 	}, 
 	"msgRename": {
-		"message": "Rename Section \"$1\" to:", 
+		"message": "Abschnitt \"$1\" umbenennen zu:", 
 		"description": "Message shown when a section is going to be renamed."
 	}
 }
